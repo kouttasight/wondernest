@@ -31,25 +31,25 @@ function objects(s){
  const out=[],n=s.options.amount,c=s.targetColour;
  if(s.id==='orchard'){
   for(let i=0;i<n;i++)if(!s.picks.includes(i))out.push(node('apple'+i,'apple',250+i*105,'Pick apple',!s.carry));
-  out.push(node('bimi','bimi',830,'Give apples to Mazidah',s.picks.length===n&&!s.opened,{enabled:!s.opened}));
+  out.push(node('mazidah','mazidah',830,'Give apples to Mazidah',s.picks.length===n&&!s.opened,{enabled:!s.opened}));
   if(s.opened&&!s.done)out.push(node('cloth','picnic',710,'Put out the picnic cloth',true));
  }
  if(s.id==='grow'){
   if(!s.opened)for(let i=0;i<s.options.choices;i++)out.push(node('seed'+i,'seed',1150+i*115,colours[(c+i)%6][0]+' seeds',i===0,{colour:(c+i)%6}));
   for(let i=0;i<2;i++)out.push(node('bed'+i,s.beds[i]===2?'flower':s.beds[i]===1?'seedbed':'bed',1390+i*155,s.beds[i]===0?'Plant seeds':s.beds[i]===1?'Water the seeds':s.beds[i]===2?'Pick flower':'Flower picked',s.opened&&((s.phase==='plant'&&s.beds[i]===0)||(s.phase==='water'&&s.beds[i]===1)||(s.phase==='pick'&&s.beds[i]===2)),{colour:c,enabled:s.beds[i]!==3}));
   if(s.opened&&s.beds.every(v=>v>=1)&&!['water','pick','give','done'].includes(s.phase))out.push(node('can','can',1240,'Take watering can',true));
-  if(s.phase==='give'||s.done)out.push(node('bimi','bimi',1850,'Give flowers to Mazidah',!s.done));
+  if(s.phase==='give'||s.done)out.push(node('mazidah','mazidah',1850,'Give flowers to Mazidah',!s.done));
  }
  if(s.id==='sort'){
   const count=s.options.choices;
   for(let i=0;i<count;i++){if(!s.picks.includes(i))out.push(node('flower'+i,'flower',1210+i*145,colours[(c+i)%6][0]+' flower',!s.carry,{colour:(c+i)%6}));out.push(node('basket'+i,'basket',1600+i*115,colours[(c+i)%6][0]+' basket',s.carry?.index===i,{colour:(c+i)%6,filled:s.delivered.includes(i)}));}
-  if(s.delivered.length===count&&!s.done)out.push(node('bimi','bimi',1870,'Show Mazidah the baskets',true));
+  if(s.delivered.length===count&&!s.done)out.push(node('mazidah','mazidah',1870,'Show Mazidah the baskets',true));
  }
  if(s.id==='water'){
   if(!s.opened)out.push(node('bucket','bucket',1170,'Take empty bucket',true));
   out.push(node('pump','pump',1350,'Pump water',s.opened&&s.water<n&&!s.flower,{amount:s.water,total:n}));
   out.push(node('thirsty','flowerbed',1650,s.flower?'Pick flower':'Pour water on the bed',s.opened&&s.water===n&&!s.flower||s.phase==='pick',{bloom:s.flower,colour:c}));
-  if(s.phase==='give'||s.done)out.push(node('bimi','bimi',1840,'Give flower to Mazidah',!s.done));
+  if(s.phase==='give'||s.done)out.push(node('mazidah','mazidah',1840,'Give flower to Mazidah',!s.done));
  }
  if(s.id==='bridge'){
   const count=s.options.choices;
@@ -96,12 +96,12 @@ function act(s,id){
  const o=objects(s).find(o=>o.id===id);if(!o||s.done)return {changed:false,said:s.done?'We can play again, or choose another place.':'Look around.'};
  if(!o.goal||!o.enabled)return {changed:false,said:o.label+'.'};
  let said=o.label+'.';
- if(s.id==='orchard'){if(id.startsWith('apple')){s.picks.push(Number(id.slice(5)));s.inventory++;said=['','One.','Two.','Three.','Four.','Five.'][s.inventory];}else if(id==='bimi'){s.opened=true;s.inventory=0;s.phase='cloth';said='Apples for Mazidah. Thank you!';}else finish(s);}
+ if(s.id==='orchard'){if(id.startsWith('apple')){s.picks.push(Number(id.slice(5)));s.inventory++;said=['','One.','Two.','Three.','Four.','Five.'][s.inventory];}else if(id==='mazidah'){s.opened=true;s.inventory=0;s.phase='cloth';said='Apples for Mazidah. Thank you!';}else finish(s);}
  if(s.id==='grow'){
   if(id==='seed0'){s.opened=true;s.phase='plant';s.carry={kind:'seed',colour:s.targetColour};}
   else if(id.startsWith('bed')){const i=Number(id.slice(3));if(s.phase==='plant'){s.beds[i]=1;if(s.beds.every(v=>v===1)){s.phase='can';s.carry=null;}}else if(s.phase==='water'){s.beds[i]=2;if(s.beds.every(v=>v===2)){s.phase='pick';s.carry=null;}}else if(s.phase==='pick'){s.beds[i]=3;s.inventory++;if(s.beds.every(v=>v===3)){s.phase='give';s.carry={kind:'flower',colour:s.targetColour};}}}
   else if(id==='can'){s.phase='water';s.carry={kind:'can'};}
-  else if(id==='bimi'){s.inventory=0;finish(s);said='Flowers for Mazidah. Thank you!';}
+  else if(id==='mazidah'){s.inventory=0;finish(s);said='Flowers for Mazidah. Thank you!';}
  }
  if(s.id==='sort'){if(id.startsWith('flower')){const i=Number(id.slice(6));s.picks.push(i);s.carry={kind:'flower',index:i,colour:(s.targetColour+i)%6};said=colours[s.carry.colour][0]+' flower.';}else if(id.startsWith('basket')){s.delivered.push(Number(id.slice(6)));s.carry=null;}else finish(s);}
  if(s.id==='water'){if(id==='bucket'){s.opened=true;s.carry={kind:'bucket'};s.phase='pump';}else if(id==='pump'){s.water++;said=['','One.','Two.','Three.','Four.','Five.'][s.water];if(s.water===s.options.amount)s.phase='pour';}else if(id==='thirsty'){if(s.phase==='pick'){s.phase='give';s.carry={kind:'flower',colour:s.targetColour};}else{s.flower=true;s.phase='pick';s.carry=null;said='Water in. A flower grows.';}}else finish(s);}

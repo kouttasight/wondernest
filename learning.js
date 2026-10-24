@@ -32,16 +32,16 @@ function extend(M){
   if(s.id==='alphapicture'){
    if(s.phase==='letter'||s.phase==='picture')for(let i=0;i<count;i++){const letter=alphabet[(alphabet.indexOf(s.focus)+(i-correct+count)%count)%26];out.push(node('choice'+i,s.phase==='letter'?'letter':'vocab',4160+i*120,s.phase==='letter'?'Find '+letter:'Collect '+vocabulary[alphabet.indexOf(letter)],i===correct,{letter,word:vocabulary[alphabet.indexOf(letter)]}));}
    if(s.phase==='post')for(let i=0;i<count;i++){const letter=alphabet[(alphabet.indexOf(s.focus)+(i-correct+count)%count)%26];out.push(node('letterbox'+i,'postbox',4550+i*110,'Post in '+letter.toLowerCase()+' box',i===correct,{letter:letter.toLowerCase()}));}
-   if(s.phase==='share'||s.done)out.push(node('bimi','bimi',4840,'Give book page to Mazidah',!s.done));
+   if(s.phase==='share'||s.done)out.push(node('mazidah','mazidah',4840,'Give book page to Mazidah',!s.done));
   }
   if(s.id==='abcorder'){
    if(s.step<3){const letter=s.route[s.step];if(!s.carry)for(let i=0;i<count;i++){const value=alphabet[(alphabet.indexOf(letter)+(i-correct+count)%count)%26];out.push(node('order'+i,'letter',4160+i*120,'Collect '+value,i===correct,{letter:value}));}out.push(node('orderslot','letter',4590,'Place '+letter+' on the path',!!s.carry,{letter:letter.toLowerCase()}));}
    else if(!s.opened)out.push(node('abcgate','gate',4740,'Open alphabet gate',true));
-   else out.push(node('bimi','bimi',4840,'Visit Mazidah along the alphabet path',!s.done));
+   else out.push(node('mazidah','mazidah',4840,'Visit Mazidah along the alphabet path',!s.done));
   }
   if(s.id==='numbermatch'){
    if(!s.opened){if(!s.carry)for(let i=0;i<count;i++){const number=(s.number-1+(i-correct+count)%count)%s.options.numberRange+1;out.push(node('numeral'+i,'number',1170+i*120,'Take number '+number,i===correct,{number}));}else for(let i=0;i<count;i++){const number=(s.number-1+(i-correct+count)%count)%s.options.numberRange+1;out.push(node('quantity'+i,'countbasket',1510+i*125,'Basket of '+number+' '+(number===1?'apple':'apples'),i===correct,{number}));}}
-   else out.push(node('bimi','bimi',1850,'Deliver the number basket to Mazidah',!s.done));
+   else out.push(node('mazidah','mazidah',1850,'Deliver the number basket to Mazidah',!s.done));
   }
   if(s.id==='numbertrail'){
    for(let i=0;i<3;i++)out.push(node('stone'+i,'number',2210+i*140,'Step on '+s.numberRoute[i],s.sequence===i,{number:s.numberRoute[i],filled:s.sequence>i}));
@@ -51,7 +51,7 @@ function extend(M){
   if(s.id==='pack'){
    if(s.packed<s.number&&!s.carry)out.push(node('supply','apple',250+(s.packed%2)*105,'Pick one apple',true));
    if(s.packed<s.number)out.push(node('packbasket','countbasket',640,'Put one apple in the basket',!!s.carry,{number:s.number,filledCount:s.packed}));
-   if(s.packed===s.number)out.push(node('bimi','bimi',830,'Give '+s.number+' '+(s.number===1?'apple':'apples')+' to Mazidah',!s.done));
+   if(s.packed===s.number)out.push(node('mazidah','mazidah',830,'Give '+s.number+' '+(s.number===1?'apple':'apples')+' to Mazidah',!s.done));
   }
   return out;
  };

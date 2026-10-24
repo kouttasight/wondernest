@@ -38,7 +38,7 @@ function actionVoice(id,result,before){
  if(result.done){playVoice(taskVoiceKeys());return;}
  const numbers=M.numberNames.slice(1).map(n=>n+'.'),i=numbers.indexOf(result.said);
  if(i>=0){playVoice(['count'+(i+1),...(before!==M.objective(current.s).label?taskVoiceKeys():[])]);return;}
- if(id==='bimi'){playVoice(['complete']);return;}
+ if(id==='mazidah'){playVoice(['complete']);return;}
  if(current.s.id==='letters'&&id.startsWith('letter')){playVoice(['letter'+current.s.carry.letter,'post']);return;}
  if(current.s.id==='words'&&id==='block0'){playVoice(['letter'+current.s.carry.letter,'wordFit']);return;}
  playVoice(taskVoiceKeys());
@@ -118,9 +118,9 @@ function loadMission(id,force=false,variant=0){if(id==='words'&&!prefs.words)id=
 function drawObjects(){
  $('objects').innerHTML='';
  for(const o of M.objects(current.s)){
-  if(o.kind==='bimi'&&(!o.enabled||current.s.done))continue;
+  if(o.kind==='mazidah'&&(!o.enabled||current.s.done))continue;
   if(current.s.done&&['cross','through','use','surprise','bell'].includes(o.id))continue;
-  const b=document.createElement('button');b.type='button';b.className='world-object'+(o.goal?' goal':'')+(o.filled?' filled':'')+(o.kind==='bimi'?' friend-cue':'')+(current.s.done?' completed-object':'');b.dataset.object=o.id;b.dataset.goal=String(o.goal);b.setAttribute('aria-label',o.label);b.innerHTML=`<span class="object-picture">${A.icon(o.kind,o)}</span><span class="object-label">${o.label}</span>`;b.style.left=(o.x*scale)+'px';b.style.bottom=((o.kind==='bimi'?185:62)*scale)+'px';b.style.width=Math.max(48,85*scale)+'px';b.style.setProperty('--picture',Math.max(35,66*scale)+'px');b.disabled=!o.enabled||current.s.done;b.onclick=()=>walkTo(o.id,true);$('objects').append(b);
+  const b=document.createElement('button');b.type='button';b.className='world-object'+(o.goal?' goal':'')+(o.filled?' filled':'')+(o.kind==='mazidah'?' friend-cue':'')+(current.s.done?' completed-object':'');b.dataset.object=o.id;b.dataset.goal=String(o.goal);b.setAttribute('aria-label',o.label);b.innerHTML=`<span class="object-picture">${A.icon(o.kind,o)}</span><span class="object-label">${o.label}</span>`;b.style.left=(o.x*scale)+'px';b.style.bottom=((o.kind==='mazidah'?185:62)*scale)+'px';b.style.width=Math.max(48,85*scale)+'px';b.style.setProperty('--picture',Math.max(35,66*scale)+'px');b.disabled=!o.enabled||current.s.done;b.onclick=()=>walkTo(o.id,true);$('objects').append(b);
  }
 }
 function resultDecor(){const s=current.s;let html='';
@@ -157,7 +157,7 @@ function layout(){const width=$('stage').clientWidth;view=width<600?560:1000;sca
 function primary(){const targets=M.objects(current.s).filter(o=>o.goal&&o.enabled);return targets.sort((a,b)=>Math.abs(a.x-current.x)-Math.abs(b.x-current.x))[0];}
 function nearFriend(o){return Math.abs(o.x-M.meta(current.s).friend)<135;}
 function reach(o){if(['cross','through'].includes(o.id))return 90;return nearFriend(o)?195:115;}
-function shortAction(o){if(!o)return 'Explore';if(o.id==='packbasket')return 'Pack';if(o.id==='orderslot')return 'Place';if(o.id.startsWith('quantity'))return 'Match';if(o.id.startsWith('letterbox'))return 'Post';if(o.id==='abcgate'||o.id==='numbergate')return 'Open';if(o.id.startsWith('stone'))return 'Step';if(o.id.startsWith('pump'))return 'Pump';if(o.kind==='bimi')return 'Give';if(o.id==='through'||o.id==='cross')return 'Go';if(o.id==='wordslot')return 'Place';if(o.id.startsWith('postbox'))return 'Post';if(o.kind==='basket'&&current.s.id==='sort')return 'Put in';if(o.kind==='socket')return 'Fit';if(o.id.startsWith('plate'))return 'Give one';if(o.id==='can'||o.id==='bucket')return 'Take';if(o.id==='gate'||o.id==='hamper'||o.id==='surprise')return 'Open';if(o.id==='bell')return 'Ring';if(o.id==='thirsty')return current.s.phase==='pick'?'Pick':'Pour';if(o.id.startsWith('bed'))return current.s.phase==='plant'?'Plant':current.s.phase==='water'?'Water':'Pick';if(o.id==='use')return 'Use';if(o.id==='cloth')return 'Put out';return 'Pick up';}
+function shortAction(o){if(!o)return 'Explore';if(o.id==='packbasket')return 'Pack';if(o.id==='orderslot')return 'Place';if(o.id.startsWith('quantity'))return 'Match';if(o.id.startsWith('letterbox'))return 'Post';if(o.id==='abcgate'||o.id==='numbergate')return 'Open';if(o.id.startsWith('stone'))return 'Step';if(o.id.startsWith('pump'))return 'Pump';if(o.kind==='mazidah')return 'Give';if(o.id==='through'||o.id==='cross')return 'Go';if(o.id==='wordslot')return 'Place';if(o.id.startsWith('postbox'))return 'Post';if(o.kind==='basket'&&current.s.id==='sort')return 'Put in';if(o.kind==='socket')return 'Fit';if(o.id.startsWith('plate'))return 'Give one';if(o.id==='can'||o.id==='bucket')return 'Take';if(o.id==='gate'||o.id==='hamper'||o.id==='surprise')return 'Open';if(o.id==='bell')return 'Ring';if(o.id==='thirsty')return current.s.phase==='pick'?'Pick':'Pour';if(o.id.startsWith('bed'))return current.s.phase==='plant'?'Plant':current.s.phase==='water'?'Water':'Pick';if(o.id==='use')return 'Use';if(o.id==='cloth')return 'Put out';return 'Pick up';}
 function updatePosition(){if(!current)return;camera=Math.max(0,Math.min(5000-view,current.x-view*.34));$('world').style.transform=`translateX(${-camera*scale}px)`;$('nori').style.left=current.x*scale+'px';$('nori').classList.toggle('facing-left',facing<0);
  const i=Math.max(0,Math.min(4,Math.floor(current.x/1000)));$('placeName').textContent=['Orchard','Garden','Workshop','Picnic','Letterwood'][i];$('pathPosition').style.left=(current.x/5000*100)+'%';
  const o=primary();$('action').disabled=paused;if(current.s.done){$('actionIcon').innerHTML=A.icon('flag');$('actionLabel').textContent='Explore';$('action').setAttribute('aria-label','Explore after finishing this chapter');}else if(o){$('actionIcon').innerHTML=A.icon(o.kind,o);const near=Math.abs(o.x-current.x)<=reach(o);$('actionLabel').textContent=near?shortAction(o):'Go';$('action').setAttribute('aria-label',near?o.label:'Go to '+o.label.toLowerCase());}
