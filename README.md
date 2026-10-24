@@ -11,3 +11,7 @@ For a local preview, serve this folder over HTTP (the 3D model and textures load
 To publish, copy this folder’s files to the GitHub Pages root, alongside the original game’s files. Keep the original index as classic.html. No build step is needed for the bundled orchard.js. All assets are served locally; there are no runtime CDN requests.
 
 Rendering requires WebGL 2 and a reasonably recent mobile browser. If 3D cannot open, the original learning adventures are linked from the loading screen. Nori uses a licensed rigged fox base; Mazidah and the environment are procedural models with photographic terrain and sky assets. This is a 3D prototype, rather than film-quality photorealism. See ORCHARD-CREDITS.md for licenses and changes. No clinical-effectiveness claim.
+
+
+## Gentle controls update
+Soft sky-blue surround, mint controls, proportional touch joystick with dead zone and automatic release reset. Arrow controls remain available in Grown-up options; keyboard, tap-to-walk and HELP remain available. Starting quantities can be 1–3. Completed flower and gate tasks persist across the current picnic session. MORE includes a quiet garden with no task. Spoken recordings finish before the latest pending prompt, with a short pause between clips; STOP, BREAK and voice-off still silence immediately.
