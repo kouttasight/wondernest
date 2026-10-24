@@ -1,18 +1,13 @@
-# WonderNest
+# WonderNest · The Orchard Picnic
 
-Nori and Mazidah’s garden picnic: a browser game with alphabet, counting, colour, shape and short-word adventures.
+A real-time 3D orchard adventure with Nori and Mazidah, six open-ended story tasks, A–Z, counting 1–10, colours, shapes and sixteen two/three-letter words.
 
-Open **index.html**, then tap **Let’s help Mazidah**. Use the large movement and action buttons or tap objects. Choose **Alphabet**, **Numbers** or **Words** to explore the learning activities.
+Open the published GitHub Pages link, then choose **Let’s help Mazidah**. Tap an object to make Nori walk to it and interact. Use the four large arrows and Jump for direct movement. HELP takes Nori to the next useful object; the action button completes that step. MORE opens every chapter. Nothing is timed or scored.
 
-- Full A–Z letter choices and uppercase/lowercase matching.
-- Number and quantity missions, 1–5 or 1–10.
-- Sixteen two/three-letter words with picture or action outcomes.
-- Natural-sounding synthetic guide voice, volume/mute and reduced-motion controls.
-- Gentle instrumental background music with its own volume/mute, speech ducking and pause controls. See MUSIC-CREDITS.md.
-- No gameplay timers, scores, failure screens, microphone or required speech.
+Voice, music, volume, reduced motion and a steady garden-view camera are available. STOP and BREAK pause the world and audio. No microphone or required speech. No account or tracking. Music volume/mute preferences are stored only on this device.
 
-This repository contains only the static game runtime. GitHub Pages should deploy from **main / (root)**. The empty .nojekyll file disables Jekyll processing. No server or build step is needed.
+For a local preview, serve this folder over HTTP (the 3D model and textures load as local assets). With Python installed: run `python -m http.server 8080 --bind 127.0.0.1` from this folder, then open `http://127.0.0.1:8080`. Double-clicking index.html is not supported for 3D asset loading. The original standalone game remains available in the separate Alphabet & Number Adventures download.
 
-The voice and animal/scenery art were generated for this prototype; matching objects are vector graphics. The voice is synthetic, not a real child or an imitation of Ms Rachel. Optional video links are external and open through a grown-up handoff. WonderNest is not affiliated with Ms Rachel or YouTube.
+To publish, copy this folder’s files to the GitHub Pages root, alongside the original game’s files. Keep the original index as classic.html. No build step is needed for the bundled orchard.js. All assets are served locally; there are no runtime CDN requests.
 
-This is a play prototype with no clinical-effectiveness claim. All choices stay open; session progress resets on reload.
+Rendering requires WebGL 2 and a reasonably recent mobile browser. If 3D cannot open, the original learning adventures are linked from the loading screen. Nori uses a licensed rigged fox base; Mazidah and the environment are procedural models with photographic terrain and sky assets. This is a 3D prototype, rather than film-quality photorealism. See ORCHARD-CREDITS.md for licenses and changes. No clinical-effectiveness claim.
