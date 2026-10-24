@@ -46,7 +46,7 @@ function actionVoice(id,result,before){
 function tone(){}
 function feedback(text){$('feedback').textContent=text;}
 function objectiveSpeech(){const s=current.s,o=M.objective(s);if(s.id==='words'&&!s.done&&!s.carry&&s.step<s.word.length)return 'Find letter '+M.letterNames[M.alphabet.indexOf(s.word[s.step])]+' for '+s.word.toLowerCase()+'.';if(s.id==='letters'&&s.carry)return 'Post '+M.letterNames[M.alphabet.indexOf(s.carry.letter)]+' in the matching box.';return o.label;}
-function syncAudio(){const on=prefs.speech;$('soundToggle').disabled=false;$('soundToggle').setAttribute('aria-pressed',String(on));$('soundToggle').textContent=on?'♫ On':'♫ Off';$('hear').disabled=false;$('speech').checked=on;$('introSound').checked=on;$('volume').value=Math.round(prefs.volume*100);$('volumeValue').textContent=Math.round(prefs.volume*100)+'%';}
+function syncAudio(){const on=prefs.speech;$('soundToggle').disabled=false;$('soundToggle').setAttribute('aria-pressed',String(on));$('soundToggle').textContent=on?'Voice on':'Voice off';$('hear').disabled=false;$('speech').checked=on;$('introSound').checked=on;$('volume').value=Math.round(prefs.volume*100);$('volumeValue').textContent=Math.round(prefs.volume*100)+'%';}
 const chapters=['orchard','water','grow','sort','bridge','trail','picnic','letters'];
 const story={
  orchard:['Apples for our picnic','Mazidah is planning a garden picnic. First, Nori can gather apples and bring them to Mazidah.','The apples are ready, and the picnic cloth is out. Next, the garden needs a drink.'],
