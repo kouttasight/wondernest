@@ -7,6 +7,8 @@ function picture(word){
  if(legacy[word])return original(legacy[word]);
  const reveal={hat:'HAT',map:'MAP',sun:'SUN',cup:'CUP'};if(reveal[word])return original('reveal',{word:reveal[word],filled:true});
  const drawings={
+ xylophone:`<path d="M12 70 74 77M15 31 76 39" fill="none" ${line}/><rect x="12" y="29" width="11" height="46" rx="3" fill="#bd7866" ${line}/><rect x="23" y="32" width="11" height="42" rx="3" fill="#d6a06b" ${line}/><rect x="34" y="35" width="11" height="38" rx="3" fill="#d5c477" ${line}/><rect x="45" y="38" width="11" height="34" rx="3" fill="#9eb58b" ${line}/><rect x="56" y="41" width="11" height="30" rx="3" fill="#90b8bb" ${line}/><rect x="67" y="44" width="11" height="26" rx="3" fill="#b29cbe" ${line}/><path d="m23 8 39 19M65 7 29 25" fill="none" ${line}/><circle cx="20" cy="7" r="6" fill="#c7b18e" ${line}/><circle cx="68" cy="6" r="6" fill="#c7b18e" ${line}/>` ,
+
  water:`<path d="M45 4C36 22 16 39 16 57a29 29 0 0 0 58 0C74 39 54 22 45 4Z" fill="#a2c7d1" ${line}/><path d="M28 50q-8 18 8 23" fill="none" stroke="#e9f3ef" stroke-width="5" stroke-linecap="round"/>`,
  rabbit:`<ellipse cx="33" cy="22" rx="9" ry="21" fill="#e8e2ea" ${line}/><ellipse cx="58" cy="22" rx="9" ry="21" fill="#e8e2ea" ${line}/><path d="M33 9v24m25-24v24" stroke="#d1a4aa" stroke-width="5"/><ellipse cx="45" cy="56" rx="29" ry="25" fill="#f2edf0" ${line}/><circle cx="34" cy="52" r="3"/><circle cx="57" cy="52" r="3"/><path d="m41 62 4 5 5-5" fill="#c58f9b"/><path d="m58 75 14-5v13Z" fill="#9c83ad"/>`,
  ball:`<circle cx="45" cy="45" r="32" fill="#b8d0bb" ${line}/><path d="M20 25q35 2 50 40M18 67q10-30 55-40" fill="none" ${line}/>` ,

@@ -2,7 +2,7 @@
 (function(root){
 function extend(M){
  const words=['UP','IN','ON','GO','SUN','CUP','HAT','MAP','CAT','DOG','BOX','BED','BUS','LOG','PIG','BAG'];
- const vocabulary=['apple','ball','cat','dog','egg','flower','gate','hat','insect','jug','key','leaf','map','nest','orange','pear','quilt','rabbit','sun','tree','umbrella','van','water','box','yarn','zip'];
+ const vocabulary=['apple','ball','cat','dog','egg','flower','gate','hat','insect','jug','key','leaf','map','nest','orange','pear','quilt','rabbit','sun','tree','umbrella','van','water','xylophone','yarn','zip'];
  M.wordBank.splice(0,M.wordBank.length,...words);M.vocabulary=vocabulary;
  const extra=[
   {id:'alphapicture',name:'Mazidah’s alphabet book',place:'Letterwood',icon:'letter',start:4050,friend:4840,steps:['Letter','Picture','Post','Share'],description:'Find a letter, collect its picture and deliver a page for Mazidah’s book.'},
@@ -59,7 +59,7 @@ function extend(M){
   if(!M.extraIds.includes(s.id))return objective(s);
   const base={step:0,total:M.meta(s).steps.length,tokens:[]};
   if(s.done)return {...base,step:base.total,label:s.id==='alphapicture'?`${s.focus} ${s.focus.toLowerCase()}: a page for Mazidah!`:s.id==='abcorder'?'The alphabet path is open.':s.id==='numbertrail'?'You followed the number trail.':`${s.number} ${s.number===1?'apple':'apples'} for Mazidah. Thank you!`,tokens:[{kind:'heart'}]};
-  if(s.id==='alphapicture')return {...base,step:['letter','picture','post','share'].indexOf(s.phase),label:s.phase==='letter'?`Find ${s.focus}.`:s.phase==='picture'?s.focus==='X'?'Find the box. X is at the end of box.':`Find ${vocabulary[alphabet.indexOf(s.focus)]} for ${s.focus}.`:s.phase==='post'?`Post the page in ${s.focus.toLowerCase()}.`:'Give Mazidah the book page.',tokens:[{kind:'letter',letter:s.focus,lower:s.focus.toLowerCase()},{kind:'vocab',word:vocabulary[alphabet.indexOf(s.focus)]}]};
+  if(s.id==='alphapicture')return {...base,step:['letter','picture','post','share'].indexOf(s.phase),label:s.phase==='letter'?`Find ${s.focus}.`:s.phase==='picture'?`Find ${vocabulary[alphabet.indexOf(s.focus)]} for ${s.focus}.`:s.phase==='post'?`Post the page in ${s.focus.toLowerCase()}.`:'Give Mazidah the book page.',tokens:[{kind:'letter',letter:s.focus,lower:s.focus.toLowerCase()},{kind:'vocab',word:vocabulary[alphabet.indexOf(s.focus)]}]};
   if(s.id==='abcorder')return {...base,step:s.step<3?(s.carry?1:0):!s.opened?2:3,label:s.step<3?(s.carry?`Place ${s.route[s.step]} after its friends.`:`Find ${s.route[s.step]} for our path.`):!s.opened?'Open the alphabet gate.':'Visit Mazidah on the new path.',tokens:s.route.map((l,i)=>({kind:'letter',letter:l,filled:i<s.step}))};
   if(s.id==='numbermatch')return {...base,step:s.opened?2:s.carry?1:0,label:s.opened?'Give Mazidah the counted basket.':s.carry?`Find a basket of ${s.number} ${s.number===1?'apple':'apples'}.`:`Find number ${s.number}.`,tokens:[{kind:'number',number:s.number},{kind:'countbasket',number:s.number}]};
   if(s.id==='numbertrail')return {...base,step:s.sequence<3?0:!s.opened?1:2,label:s.sequence<3?`Step on ${s.numberRoute[s.sequence]}.`:!s.opened?'Open the number gate.':'Walk through to Mazidah’s picnic.',tokens:s.numberRoute.map((n,i)=>({kind:'number',number:n,filled:i<s.sequence}))};
