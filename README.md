@@ -1,8 +1,8 @@
 # WonderNest
 
-Nori and Bimi’s garden picnic: a browser game with alphabet, counting, colour, shape and short-word adventures.
+Nori and Mazidah’s garden picnic: a browser game with alphabet, counting, colour, shape and short-word adventures.
 
-Open **index.html**, then tap **Let’s help Bimi**. Use the large movement and action buttons or tap objects. Choose **Alphabet**, **Numbers** or **Words** to explore the learning activities.
+Open **index.html**, then tap **Let’s help Mazidah**. Use the large movement and action buttons or tap objects. Choose **Alphabet**, **Numbers** or **Words** to explore the learning activities.
 
 - Full A–Z letter choices and uppercase/lowercase matching.
 - Number and quantity missions, 1–5 or 1–10.
